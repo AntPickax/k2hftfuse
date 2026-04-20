@@ -50,6 +50,9 @@ typedef struct k2hft_list_dir{
 	k2hft_list_dir(void) : strname(""), pstat(NULL) {}
 	~k2hft_list_dir(void)
 	{
+		// cppcheck-suppress unmatchedSuppression
+		// cppcheck-suppress noCopyConstructor
+		// cppcheck-suppress noOperatorEq
 		K2HFT_DELETE(pstat);
 	}
 }K2HFTLISTDIR, *PK2HFTLISTDIR;
@@ -174,6 +177,9 @@ typedef struct k2hft_rule{
 	}
 	~k2hft_rule(void)
 	{
+		// cppcheck-suppress unmatchedSuppression
+		// cppcheck-suppress noCopyConstructor
+		// cppcheck-suppress noOperatorEq
 		K2HFT_DELETE(pPlugin);
 		free_match_list(MatchingList);
 	}

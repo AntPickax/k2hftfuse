@@ -1534,7 +1534,7 @@ bool K2hFtInfo::LoadYamlMainSec(yaml_parser_t& yparser, mode_t init_mode, mode_t
 
 				}else if(0 == strcasecmp(INI_K2HFT_K2HFULLMAP_STR, key.c_str())){
 					// IsFullmap
-					string	value = upper(value);
+					string	value = upper(reinterpret_cast<const char*>(yevent.data.scalar.value));
 					if(INI_K2HFT_YES1_VAL_STR == value || INI_K2HFT_YES2_VAL_STR == value || INI_K2HFT_ON_VAL_STR == value){
 						IsFullmap = true;
 					}else if(INI_K2HFT_NO1_VAL_STR == value || INI_K2HFT_NO2_VAL_STR == value || INI_K2HFT_OFF_VAL_STR == value){
@@ -1545,7 +1545,7 @@ bool K2hFtInfo::LoadYamlMainSec(yaml_parser_t& yparser, mode_t init_mode, mode_t
 
 				}else if(0 == strcasecmp(INI_K2HFT_K2HINIT_STR, key.c_str())){
 					// IsInitialize
-					string	value = upper(value);
+					string	value = upper(reinterpret_cast<const char*>(yevent.data.scalar.value));
 					if(INI_K2HFT_YES1_VAL_STR == value || INI_K2HFT_YES2_VAL_STR == value || INI_K2HFT_ON_VAL_STR == value){
 						IsInitialize = true;
 					}else if(INI_K2HFT_NO1_VAL_STR == value || INI_K2HFT_NO2_VAL_STR == value || INI_K2HFT_OFF_VAL_STR == value){
@@ -1590,7 +1590,7 @@ bool K2hFtInfo::LoadYamlMainSec(yaml_parser_t& yparser, mode_t init_mode, mode_t
 
 				}else if(0 == strcasecmp(INI_K2HFT_BINTRANS_STR, key.c_str())){
 					// Binary Transfer Mode
-					string	value = upper(value);
+					string	value = upper(reinterpret_cast<const char*>(yevent.data.scalar.value));
 					if(INI_K2HFT_YES1_VAL_STR == value || INI_K2HFT_YES2_VAL_STR == value || INI_K2HFT_ON_VAL_STR == value){
 						IsBinaryMode = true;
 					}else if(INI_K2HFT_NO1_VAL_STR == value || INI_K2HFT_NO2_VAL_STR == value || INI_K2HFT_OFF_VAL_STR == value){
@@ -2023,6 +2023,8 @@ bool K2hFtInfo::LoadYamlAclPart(yaml_parser_t& yparser, k2hftmatchlist_t& Matchs
 	return result;
 }
 
+// cppcheck-suppress unmatchedSuppression
+// cppcheck-suppress functionStatic
 bool K2hFtInfo::LoadYamlAclOneValue(yaml_parser_t& yparser, k2hftmatchlist_t& Matchs)
 {
 	// Load one array value in YAML_SEQUENCE_START_EVENT(ALLOW / DENY array)
@@ -2711,6 +2713,8 @@ bool K2hFtInfo::CreateFile(const char* path, mode_t mode, uid_t uid, gid_t gid, 
 	return false;
 }
 
+// cppcheck-suppress unmatchedSuppression
+// cppcheck-suppress functionStatic
 bool K2hFtInfo::UpdateMTime(uint64_t handle)
 {
 	// [NOTE]
@@ -2728,6 +2732,8 @@ bool K2hFtInfo::UpdateMTime(uint64_t handle)
 // If returned pointer is not same data pointer, MUST free returned pointer.
 // It is allocated in convert_to_output().
 //
+// cppcheck-suppress unmatchedSuppression
+// cppcheck-suppress functionStatic
 unsigned char* K2hFtInfo::CvtPushData(const unsigned char* data, size_t length, uint64_t filehandle, size_t& cvtlength) const
 {
 	if(!data || 0 == length || 0 == filehandle){

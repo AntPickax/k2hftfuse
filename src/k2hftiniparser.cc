@@ -63,9 +63,8 @@ bool read_ini_file_contents(const char* path, strlst_t& lines, strlst_t& files)
 		return false;
 	}
 
-	string		line;
-	int			lineno;
-	for(lineno = 1; cfgstream.good() && getline(cfgstream, line); lineno++){
+	string	line;
+	for(int lineno = 1; cfgstream.good() && getline(cfgstream, line); lineno++){
 		line = trim(line);
 		if(0 == line.length()){
 			continue;
