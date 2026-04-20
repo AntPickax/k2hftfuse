@@ -44,6 +44,9 @@ K2hFtBinBuff::K2hFtBinBuff(void) : CacheBuff(NULL), CacheBuffSize(0), CacheBuffP
 
 K2hFtBinBuff::~K2hFtBinBuff(void)
 {
+	// cppcheck-suppress unmatchedSuppression
+	// cppcheck-suppress noCopyConstructor
+	// cppcheck-suppress noOperatorEq
 	K2HFT_FREE(CacheBuff);
 }
 

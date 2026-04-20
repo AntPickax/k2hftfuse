@@ -574,6 +574,8 @@ bool K2hFtPluginMan::RunWatchThread(void)
 	return true;
 }
 
+// cppcheck-suppress unmatchedSuppression
+// cppcheck-suppress functionStatic
 bool K2hFtPluginMan::StopWatchThread(void)
 {
 	if(!K2hFtPluginMan::is_run_thread){
@@ -703,8 +705,9 @@ bool K2hFtPluginMan::RunPlugin(PK2HFT_PLUGIN pplugin, bool is_wait_cond)
 	}
 
 	// do run
-	// cppcheck-suppress redundantAssignment
-	if(K2HFT_INVALID_PID == (pplugin->pid = K2hFtPluginMan::RunPluginProcess(pplugin->BaseParam.c_str(), pplugin->OutputPath.c_str(), pplugin->PipeFilePath.c_str(), pplugin->pipe_input, (is_wait_cond ? condname.c_str() : NULL), (is_wait_cond ? mutexname.c_str() : NULL)))){
+	pid_t	tmp_pid	= K2hFtPluginMan::RunPluginProcess(pplugin->BaseParam.c_str(), pplugin->OutputPath.c_str(), pplugin->PipeFilePath.c_str(), pplugin->pipe_input, (is_wait_cond ? condname.c_str() : NULL), (is_wait_cond ? mutexname.c_str() : NULL));
+	pplugin->pid	= tmp_pid;
+	if(K2HFT_INVALID_PID == tmp_pid){
 		ERR_K2HFTPRN("Could not run plugin.");
 		pplugin->exit_count++;
 		return false;
@@ -791,6 +794,8 @@ bool K2hFtPluginMan::ExecPlugins(void)
 	return true;
 }
 
+// cppcheck-suppress unmatchedSuppression
+// cppcheck-suppress functionStatic
 bool K2hFtPluginMan::KillPlugin(PK2HFT_PLUGIN pplugin)
 {
 	if(K2HFT_INVALID_PID == pplugin->pid){

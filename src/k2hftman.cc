@@ -424,7 +424,7 @@ bool K2hFtManage::Initialize(const char* config, bool is_run_chmpx, const char* 
 	is_load_tp = true;
 
 	// enable transaction plugin
-	if(!k2hash.EnableTransaction(NULL, NULL, 0L, reinterpret_cast<const unsigned char*>(confinfo.Config.c_str()), confinfo.Config.length() + 1), confinfo.GetExpireTime()){
+	if(!k2hash.EnableTransaction(NULL, NULL, 0L, reinterpret_cast<const unsigned char*>(confinfo.Config.c_str()), (confinfo.Config.length() + 1), confinfo.GetExpireTime())){
 		ERR_K2HFTPRN("Could not enable %s transaction plugin.", confinfo.GetCtpDtorPath());
 		ERR_K2HFTPRN("Please check chmpx slave process running, if it does not run, k2hftfuse can not run.");
 
